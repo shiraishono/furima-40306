@@ -32,9 +32,9 @@
 | user                 | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :users
-- has_one :histories
-- has_one_attached :images (ActiveStorageで実装)
+- belongs_to :user
+- has_one :history
+- has_one_attached :image (ActiveStorageで実装)
 
 ## historiesテーブル（購入履歴機能）
 
@@ -44,9 +44,9 @@
 | item   | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :users
-- belongs_to :items
-- has_one :purchases
+- belongs_to :user
+- belongs_to :item
+- has_one :purchase
 
 ## purchasesテーブル（商品購入機能）
 
@@ -61,4 +61,4 @@
 | history         | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :histories
+- belongs_to :history
