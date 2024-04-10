@@ -15,40 +15,50 @@
 
 ### Association
 - has_many :items
-- has_many :purchases
+- has_many :histories
 
 ## itemsテーブル（商品出品機能）
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| product_name       | string     | null: false                    |
-| product_description| text       | null: false                    |
-| product_category   | string     | null: false                    |
-| product_condition  | string     | null: false                    |
-| shipping_charges   | string     | null: false                    |
-| region_of_origin   | string     | null: false                    |
-| shipping_days      | string     | null: false                    |
-| selling_price      | integer    | null: false                    |
-| user               | references | null: false, foreign_key: true |
+| Column               | Type       | Options                        |
+| -------------------- | ---------- | ------------------------------ |
+| product_name         | string     | null: false                    |
+| product_description  | text       | null: false                    |
+| product_category_id  | integer    | null: false                    |
+| product_condition_id | integer    | null: false                    |
+| shipping_charge_id   | integer    | null: false                    |
+| region_of_origin_id  | integer    | null: false                    |
+| shipping_day_id      | integer    | null: false                    |
+| selling_price        | integer    | null: false                    |
+| user                 | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
-- has_one :purchase
-- has_one_attached :image (ActiveStorageで実装)
+- belongs_to :users
+- has_one :histories
+- has_one_attached :images (ActiveStorageで実装)
+
+## historiesテーブル（購入履歴機能）
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :users
+- belongs_to :items
+- has_one :purchases
 
 ## purchasesテーブル（商品購入機能）
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | post_code       | string     | null: false                    |
-| prefectures     | string     | null: false                    |
+| prefecture_id   | integer    | null: false                    |
 | municipality    | string     | null: false                    |
 | street_address  | string     | null: false                    |
 | building_name   | string     |                                |
 | phone_number    | string     | null: false                    |
-| user            | references | null: false, foreign_key: true |
-| item            | references | null: false, foreign_key: true |
+| history         | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
-- belongs_to :item
+- belongs_to :histories
