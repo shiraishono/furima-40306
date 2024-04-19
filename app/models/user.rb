@@ -3,7 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # アソシエーション
-  #has_many :items
+  has_many :items
   #has_many :histories
 
   # バリデーション

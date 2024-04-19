@@ -14,8 +14,8 @@
 | birth_date         | date   | null: false               |
 
 ### Association
-- has_many :items
-- has_many :histories
+- has_many :item
+- has_many :history
 
 ## itemsテーブル（商品出品機能）
 
