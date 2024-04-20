@@ -9,7 +9,7 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
-  has_one :history
+  #has_one :history
 
   # バリデーション
   validates :product_category_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
@@ -20,6 +20,11 @@ class Item < ApplicationRecord
 
   validates :product_name, presence: true
   validates :product_description, presence: true
-  validates :selling_price, presence: { message: "can't be blank" }, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is not a valid price" }
+  validates :selling_price, presence: { message: "can't be blank" },
+                          numericality: { only_integer: true,
+                                          greater_than_or_equal_to: 300,
+                                          less_than_or_equal_to: 9999999,
+                                          message: "is not a valid price" }
+
   validates :image, presence: true
 end
