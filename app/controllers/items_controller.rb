@@ -19,13 +19,12 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path, notice: '商品が正常に登録されました。'
     else
-      # ステータスコード422 (Unprocessable Entity) を付与してnewテンプレートを再表示
       render :new, status: :unprocessable_entity
     end
   end
 
-  #def show
-  #end
+  def show
+  end
 
   #def edit
   #end
@@ -63,7 +62,7 @@ class ItemsController < ApplicationController
     #end
   #end
 
-  #def set_item
-    #@item = Item.find(params[:id])
-  #end
+  def set_item
+    @item = Item.find(params[:id])
+  end
 end
