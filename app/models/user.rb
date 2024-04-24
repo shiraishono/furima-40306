@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   # アソシエーション
   has_many :items
-  #has_many :histories
+  #has_many :buys
 
   # バリデーション
   validates :nickname, presence: true

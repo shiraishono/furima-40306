@@ -20,6 +20,6 @@ class RegionOfOrigin < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :items
-  #has_many :purchase
+  #has_many :shipping_address
 
   end

@@ -1,6 +1,6 @@
-class CreateHistories < ActiveRecord::Migration[7.0]
+class CreateBuys < ActiveRecord::Migration[7.0]
   def change
-    create_table :histories do |t|
+    create_table :buy do |t|
       t.references :user,  null: false, foreign_key: true
       t.references :item,  null: false, foreign_key: true
 

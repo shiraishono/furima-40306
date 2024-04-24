@@ -1,4 +1,4 @@
-.purchase-btn {
+.shipping_address-btn {
   width: 120px;
   background: #3ccace;
   text-align: center;
@@ -9,7 +9,7 @@
   padding: 15px;
 }
 
-.purchase-btn-text {
+.shipping_address-btn-text {
   color: #fff;
   display: block;
   font-size: 18px;
@@ -17,6 +17,6 @@
   margin-bottom: 5px;
 }
 
-.purchase-btn-icon {
+.shipping_address-icon {
   width: 60%;
 }
