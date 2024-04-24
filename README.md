@@ -15,7 +15,7 @@
 
 ### Association
 - has_many :item
-- has_many :history
+- has_many :buy
 
 ## itemsテーブル（商品出品機能）
 
@@ -33,10 +33,10 @@
 
 ### Association
 - belongs_to :user
-- has_one :history
+- has_one :buy
 - has_one_attached :image (ActiveStorageで実装)
 
-## historiesテーブル（購入履歴機能）
+## buysテーブル（購入履歴機能）
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
@@ -46,9 +46,9 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one :purchase
+- has_one :shipping_address
 
-## purchasesテーブル（商品購入機能）
+## shipping_addressesテーブル（商品購入機能）
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
@@ -58,7 +58,7 @@
 | street_address  | string     | null: false                    |
 | building_name   | string     |                                |
 | phone_number    | string     | null: false                    |
-| history         | references | null: false, foreign_key: true |
+| buy             | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :history
+- belongs_to :buy

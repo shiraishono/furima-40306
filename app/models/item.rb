@@ -9,7 +9,7 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
-  #has_one :history
+  #has_one :buy
 
   # バリデーション
   validates :product_category_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
