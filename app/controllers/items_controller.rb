@@ -1,10 +1,9 @@
 class ItemsController < ApplicationController
 
-  #before_action :authenticate_user!, only: [:new, :edit ,:destroy]
-  #before_action :move_to_index, only: [:edit]
+  before_action :authenticate_user!, only: [:edit, :new, :update, :destroy]
+  before_action :move_to_index, only: [:edit]
   #before_action :move_to_index_sold_out, only: [:edit]
   before_action :set_item, only: [:edit, :show, :update, :destroy]
-  before_action :authenticate_user!, only: [:new]
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -26,16 +25,18 @@ class ItemsController < ApplicationController
   def show
   end
 
-  #def edit
-  #end
+  def edit
+    redirect_to root_path unless current_user.id == @item.user_id
+  end
 
-  #def update
-    #if @item.update(item_params)
-      #redirect_to item_path(@item.id)
-    #else
-      #render :edit
-    #end
-  #end
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item)
+    else
+      render :edit, status: :unprocessable_entity
+      #status: :unprocessable_entityが無かった為、最初のログがロールバック後に成功したレスポンス（200 OK）を返しエラー文を表示しなかった。
+    end
+  end
 
   #def destroy
     #@item.destroy
@@ -45,15 +46,15 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:product_name,:product_description,:product_category_id,:product_condition_id,:shipping_charge_id,:region_of_origin_id,:shipping_day_id,:selling_price,:image).merge(user_id: current_user.id)
+    params.require(:item).permit(:product_name, :product_description, :product_category_id, :product_condition_id, :shipping_charge_id, :region_of_origin_id, :shipping_day_id, :selling_price, :image).merge(user_id: current_user.id)
   end
 
-  #def move_to_index
-    #@item = Item.find(params[:id])
-    #unless user_signed_in? && current_user == @item.user
-      #redirect_to action: :index
-    #end
-  #end
+  def move_to_index
+    @item = Item.find(params[:id])
+    unless user_signed_in? && current_user == @item.user
+      redirect_to action: :index
+    end
+  end
 
   #def move_to_index_sold_out
     #@item = Item.find(params[:id])
