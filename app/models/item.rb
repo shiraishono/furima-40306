@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  # アソシエーション
+  
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :product_category
   belongs_to_active_hash :product_condition
@@ -11,20 +11,19 @@ class Item < ApplicationRecord
   has_one_attached :image
   has_one :buy
 
-  # バリデーション
-  validates :product_category_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :product_condition_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :shipping_charge_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :region_of_origin_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :shipping_day_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
 
-  validates :product_name, presence: true
-  validates :product_description, presence: true
-  validates :selling_price, presence: { message: "can't be blank" },
-                            numericality: { only_integer: true,
-                                          greater_than_or_equal_to: 300,
-                                          less_than_or_equal_to: 9999999,
-                                          message: "is not a valid price" }
-
-  validates :image, presence: true
+  with_options presence: true do
+    validates :product_category_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :product_condition_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :shipping_charge_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :region_of_origin_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :shipping_day_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :product_name
+    validates :product_description
+    validates :selling_price, numericality: { only_integer: true,
+                                              greater_than_or_equal_to: 300,
+                                              less_than_or_equal_to: 9999999,
+                                              message: "is not a valid price" }
+    validates :image
+  end
 end
