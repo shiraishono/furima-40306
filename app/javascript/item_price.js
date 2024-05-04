@@ -11,3 +11,4 @@ function updatePriceCalculation() {
 }
 
 window.addEventListener('turbo:load', updatePriceCalculation);
+window.addEventListener('turbo:render', updatePriceCalculation);
